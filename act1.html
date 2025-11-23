@@ -2,75 +2,49 @@
 <html lang="en">
 
 <head>
-    <style>
-        body {
-            background-color: beige;
-
-        }
-
-        #myid,
-        #myid2 {
-            width: 50vw;
-            height: 10vw;
-            background-color: aqua;
-            margin: auto;
-            padding: 5px;
-            border: 2px solid blue;
-        }
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Classes</title>
 </head>
 
 <body>
-    <h1>Accessing Values with HTML DOM</h1>
-    <input type="text" id="myinput" value="" placeholder="Enter comma separated values" style="width: 400px;">
-    <button type="button" id="btn">Push into Array</button>
-    <br><br>
 
-    <div id="myid">
-        <p id="demo"></p>
-    </div>
-    <br><br>
-
-
+    <h1>Project in JS Classes</h1>
+    <p></p>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
 
     <script>
-        // Creating an Object variable
-        const obj = { name: "mazidat", course: "JavaScript" };
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            details() {
+                return `Name: ${this.name}, Age: ${this.age}`;
+            }
+        }
+        // Inheriting Person class
+        class Employee extends Person {
+            constructor(name, age, position) {
+                super(name, age);
+                this.position = position;
+            }
+            get details() {
+                return `${super.details()}, Position: ${this.position}`;
+            }
 
-        // Creating an Array Variable
-        const arr = [];  //empty 
-
-        // Button element access in JS
-        const btn = document.getElementById("btn");
-
-
-
-        btn.addEventListener("click", () => {
-
-
-            const output = document.getElementById("demo");
-            // Input value
-            const input_entry = document.getElementById("myinput").value;
-
-            if (input_entry != "") {
-                if (input_entry.includes(",")) {
-                    input_val = input_entry.split(",");
-                    arr.push(...input_val);
-                    output.innerText = arr.join("|");
-                }
-                else {
-                    input_val = input_entry.trim();
-                    arr.push(input_val);
-                    output.innerText = arr.join("|");
-                }
+            static company() {
+                return "Tech Solutions Inc.";
             }
 
 
-        })
+        }
 
+        const person = new Employee("Anubhav Lal", 100, "Coding Instructor");
+        document.getElementById("demo1").innerHTML = person.details;
+        // Accessing static method
+        document.getElementById("demo2").innerHTML = Employee.company();
 
     </script>
 </body>
